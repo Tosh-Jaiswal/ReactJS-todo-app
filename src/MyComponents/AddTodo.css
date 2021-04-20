@@ -1,0 +1,8 @@
+ #addTodo{
+    border-radius: 25px;
+    /* border: 2px solid red; */
+    background: rgb(125, 224, 11);
+    padding: 10px;
+    width: 100%;
+    height: auto;
+  }
