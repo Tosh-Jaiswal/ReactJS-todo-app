@@ -8,8 +8,16 @@ import React, { useState, useEffect } from 'react';
 import {
   BrowserRouter as Router,
   Switch,
-  Route 
+  Route
 } from "react-router-dom";
+
+var today = new Date();
+var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+var time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
+let state = {
+  currentDate: date,
+  currentTime: time
+}
 
 function App() {
   let initTodo;
@@ -22,19 +30,16 @@ function App() {
 
   const onDelete = (todo) => {
     console.log("I am ondDelete of todo", todo);
-    // Deleting this way in react does not work
-    // let index = todos.indexOf(todo);
-    // todos.splice(index, 1);
 
     setTodos(todos.filter((e) => {
       return e !== todo;
     }));
-    // console.log("deleted", todos)
+
     localStorage.setItem("todos", JSON.stringify(todos));
   }
 
-  const addTodo = (title, desc) => {
-    console.log("I am ", title, desc);
+  const addTodo = (title, desc, currDate, currTime) => {
+    console.log("I am ", title, desc, currDate, currTime);
     let sno;
     if (todos.length === 0) {
       sno = 0;
@@ -45,7 +50,9 @@ function App() {
     const myTodo = {
       sno: sno,
       title: title,
-      desc: desc
+      desc: desc,
+      currDate: state.currentDate,
+      currTime: state.currentTime
     }
     setTodos([...todos, myTodo]);
     console.log(myTodo);
